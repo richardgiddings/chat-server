@@ -18,9 +18,9 @@ def post():
     message = request.form['message']
     user = request.form['user']
     channel = request.form['channel']
-
-    now = datetime.datetime.now().replace(microsecond=0).time()
-    r.publish(channel, f"[{now.isoformat()}][{user}]: {message}")
+    
+    now = datetime.datetime.now().strftime("%d/%b/%Y %H:%M:%S%z") 
+    r.publish(channel, f"[{now}][{user}]: {message}")
     return Response(status=204)
 
 
