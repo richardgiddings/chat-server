@@ -20,7 +20,7 @@ def post():
     channel = request.form['channel']
 
     now = datetime.datetime.now().replace(microsecond=0).time()
-    r.publish(channel, '[%s][%s]: %s' % (now.isoformat(), user, message))
+    r.publish(channel, f"[{now.isoformat()}][{user}]: {message}")
     return Response(status=204)
 
 
