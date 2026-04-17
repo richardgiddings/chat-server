@@ -10,7 +10,7 @@ from decouple import config
 
 app = Flask(__name__)
 app.secret_key = config('SECRET_KEY')
-r = redis.Redis(host='localhost', port=6379, db=0)
+r = redis.Redis(host=config('REDIS_HOST'), port=config('REDIS_PORT'))
 
 
 @app.route('/post', methods=['POST'])
