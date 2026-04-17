@@ -13,6 +13,15 @@ app.secret_key = config('SECRET_KEY')
 r = redis.Redis(host=config('REDIS_HOST'), port=config('REDIS_PORT'))
 
 
+@app.route('/active_channels')
+def get_active_channels():
+    channels = r.pubsub_channels()
+    channels_string = ""
+    for channel in channels:
+        channels_string += f"{channel.decode('ascii')}\n"
+    return Response(channels_string)
+
+
 @app.route('/post', methods=['POST'])
 def post():
     message = request.form['message']
